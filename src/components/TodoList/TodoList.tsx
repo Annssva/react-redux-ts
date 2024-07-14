@@ -1,6 +1,9 @@
 import React, {useEffect} from 'react';
-import {useTypeSelector} from "../hooks/useTypeSelector";
-import {useActions} from "../hooks/useActions";
+import {useTypeSelector} from "../../hooks/useTypeSelector";
+import {useActions} from "../../hooks/useActions";
+import styles from "./TodoList.module.scss"
+import classnames from "classnames"
+import Loading from "../Loading/Loading";
 
 const TodoList: React.FC = () => {
   const {page, error, todos, limit, loading} = useTypeSelector(state => state.todo)
@@ -12,7 +15,7 @@ const TodoList: React.FC = () => {
   }, [page])
 
   if (loading) {
-    return <h1>Loading...</h1>
+    return <Loading />
   }
 
   if (error) {
@@ -20,19 +23,21 @@ const TodoList: React.FC = () => {
   }
 
   return (
-    <div >
+    <div className={classnames(styles.container)}>
+      <h1>Todo:</h1>
       {todos.map(todo => <div key={todo.id}>{todo.id} - {todo.title}</div>)}
-      <div style={{display: "flex"}}>
+      <div
+        className={classnames(styles.pages)}
+      >
         {pages.map( p =>
           <div
-            style={{border: p === page ? '2px solid green' : "1px solid gray", padding: '10px', margin: '5px'}}
+            className={classnames(styles.page, { [styles.page_select]: p === page })}
             onClick={() => setTodoPage(p)}
           >
             {p}
           </div>
         )}
       </div>
-
     </div>
   );
 };

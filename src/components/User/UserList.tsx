@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react';
-import {useDispatch, useSelector} from "react-redux";
-import {useTypeSelector} from "../hooks/useTypeSelector";
-import {fetchUsers} from "../store/action-creator/user";
-import {useActions} from "../hooks/useActions";
+import {useTypeSelector} from "../../hooks/useTypeSelector";
+import {useActions} from "../../hooks/useActions";
+import styles from "./UserList.module.scss"
+import Loading from "../Loading/Loading";
 
 const UserList: React.FC = () => {
   const {error, users, loading} = useTypeSelector(state => state.user)
@@ -13,7 +13,7 @@ const UserList: React.FC = () => {
   }, [])
 
   if (loading) {
-    return <h1>Loading...</h1>
+    return <Loading />
   }
 
   if (error) {
@@ -21,7 +21,8 @@ const UserList: React.FC = () => {
   }
 
   return (
-    <div>
+    <div className={styles.user_container}>
+      <h1>Users:</h1>
       {users.map(user =>
       <div key={user.id}>{user.name}</div>)}
     </div>
