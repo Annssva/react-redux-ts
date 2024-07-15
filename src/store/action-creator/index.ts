@@ -1,7 +1,9 @@
-import * as UserActionCreators from './user'
-import * as TodoActionCreators from './todo'
+import * as UserActionCreators from './user';
+import * as TodoActionCreators from './todo';
 
-export default {
+const ActionCreators = {
   ...TodoActionCreators,
-  ...UserActionCreators
-}
+  ...UserActionCreators,
+};
+
+export default ActionCreators;

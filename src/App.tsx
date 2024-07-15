@@ -8,7 +8,7 @@ import Navbar from "./components/Navbar/Navbar";
 
 const App = () => {
   return (
-    <div>
+    <>
       <Navbar />
       <Routes>
         <Route key="/users" path="/users" element={
@@ -24,7 +24,7 @@ const App = () => {
         }>
         </Route>
       </Routes>
-    </div>
+    </>
   );
 };
 
